@@ -1,0 +1,17 @@
+node_modules
+package-lock.json
+dist
+# Logs
+logs
+.env
+npm-debug.log*
+debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+npm-debug.log*
+.vscode/
+data/*.db
+futbolito.db
+.DS_Store
+coverage/

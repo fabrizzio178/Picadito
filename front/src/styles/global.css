@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes turfPulse {
+  0% {
+    transform: scale(0.98);
+    box-shadow: 0 10px 30px rgba(31, 162, 58, 0.08);
+  }
+  50% {
+    transform: scale(1);
+    box-shadow: 0 20px 45px rgba(31, 162, 58, 0.16);
+  }
+  100% {
+    transform: scale(0.98);
+    box-shadow: 0 10px 30px rgba(31, 162, 58, 0.08);
+  }
+}
+
+@keyframes crestFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f3fbef;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(46, 194, 72, 0.25), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(19, 85, 36, 0.12), transparent 50%),
+    linear-gradient(145deg, rgba(31, 162, 58, 0.12) 0%, rgba(19, 85, 36, 0.04) 55%, rgba(255, 255, 255, 0.6) 100%),
+    linear-gradient(120deg, rgba(19, 85, 36, 0.08) 25%, transparent 25%),
+    linear-gradient(300deg, rgba(19, 85, 36, 0.08) 25%, transparent 25%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(19, 85, 36, 0.08),
+      rgba(19, 85, 36, 0.08) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  color: #1b3825;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  background: transparent;
+}
+
+@media (max-width: 48em) {
+  .app-header {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.pitch-preview-card {
+  margin-inline: auto;
+}
+
+@media (min-width: 62em) {
+  .pitch-preview-card {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}

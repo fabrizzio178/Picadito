@@ -1,0 +1,16 @@
+.env
+node_modules/
+dist/
+data/futbolito.db
+data/*
+!.gitkeep
+logs/
+*.log
+.DS_Store
+.vscode/
+coverage/
+*.sqlite
+*.sqlite3
+*.db
+src/data/*.db
+data/*.db
