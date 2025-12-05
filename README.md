@@ -64,5 +64,7 @@ Picadito elimina esa fricción: el jugador ve la disponibilidad en tiempo real, 
 
 Desarrollado por Fabrizzio Sana.  
 Este proyecto refleja un enfoque orientado a diseño limpio, escalabilidad y una experiencia de usuario clara, combinando conocimientos de desarrollo Full Stack y arquitectura de software.
+ 
+#### "Este código es de uso personal y educativo. Queda prohibida su reproducción, distribución o uso comercial sin autorización expresa del autor."
 
 Todos los derechos reservados.
