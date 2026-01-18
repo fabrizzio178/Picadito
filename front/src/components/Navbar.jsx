@@ -21,7 +21,8 @@ import {
   IconShield,
   IconSoccerField,
   IconLayoutDashboard,
-  IconCalendar
+  IconCalendar,
+  IconUser
 } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -176,6 +177,10 @@ export default function Navbar() {
                     {user.email || user.mail || "--"}
                   </Menu.Item>
                   
+                  <Menu.Item component={Link} to="/profile" leftSection={<IconUser size={16} />}>
+                    Mi Perfil
+                  </Menu.Item>
+                  
                   {isAdmin && (
                     <Menu.Item component={Link} to="/admin" leftSection={<IconLayoutDashboard size={16} />}>
                       Panel admin
@@ -199,101 +204,12 @@ export default function Navbar() {
               </Group>
             )}
 
-            <ActionIcon size="lg" radius="xl" variant="light" color="turf" hiddenFrom="md" onClick={toggle}>
-              <IconMenu2 size={20} />
+            <ActionIcon size="lg" radius="xl" variant="light" color="turf" hiddenFrom="md" style={{ display: 'none' }}>
+              {/* BURGER MENU REMOVED - Replaced by MobileNavbar */}
             </ActionIcon>
           </Group>
         </Group>
       </Paper>
-
-      {/* --- MOBILE DRAWER --- */}
-      <Drawer
-        opened={drawerOpened}
-        onClose={close}
-        padding="lg"
-        styles={{ content: { background: "#fdfefb" } }}
-      >
-        <Stack gap="md">
-          <Group justify="space-between">
-            <Group gap="xs">
-              <Avatar radius="xl" color="turf">
-                <IconBallFootball size={18} />
-              </Avatar>
-              <Box>
-                <Text fw={600}>Turnos Fútbol</Text>
-                <Text fz="xs" c="dimmed">
-                  Organizá tu partido
-                </Text>
-              </Box>
-            </Group>
-            <Badge color="turf" variant="light">
-              Club abierto hoy
-            </Badge>
-          </Group>
-
-          <Divider color="gray.2" />
-
-          <Stack gap="xs">
-            {/* Solo mostramos botones de cliente si NO es admin */}
-             {!isAdmin && (
-               <>
-                  <Button
-                    component={Link}
-                    to="/"
-                    leftSection={<IconSoccerField size={16} />}
-                    radius="xl"
-                    color="turf"
-                    variant="gradient"
-                    onClick={close}
-                  >
-                    Reservar cancha
-                  </Button>
-
-                  <Button
-                    component={Link}
-                    to="/mis-reservas"
-                    leftSection={<IconCalendar size={16} />}
-                    radius="xl"
-                    color="turf"
-                    variant={isActive("/mis-reservas") ? "filled" : "light"}
-                    onClick={close}
-                  >
-                    Mis turnos
-                  </Button>
-               </>
-             )}
-
-             {isAdmin && (
-                <Button
-                    component={Link}
-                    to="/admin"
-                    leftSection={<IconLayoutDashboard size={16} />}
-                    radius="xl"
-                    variant="light"
-                    color="dark"
-                    onClick={close}
-                >
-                    Panel Admin
-                </Button>
-             )}
-          </Stack>
-
-          {!user ? (
-            <Stack gap="xs">
-              <Button component={Link} to="/login" radius="xl" variant="light" color="turf" onClick={close}>
-                Ingresar
-              </Button>
-              <Button component={Link} to="/register" radius="xl" color="turf" onClick={close}>
-                Crear cuenta
-              </Button>
-            </Stack>
-          ) : (
-            <Button radius="xl" color="red" leftSection={<IconLogout size={16} />} onClick={handleLogout}>
-              Cerrar sesión
-            </Button>
-          )}
-        </Stack>
-      </Drawer>
     </Box>
   );
 }

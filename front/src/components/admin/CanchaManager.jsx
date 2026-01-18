@@ -30,7 +30,7 @@ import {
 import { notifications } from "@mantine/notifications";
 import { toast } from "react-toastify"; 
 import clubApi from "../../services/clubApi";
-import ReservaModal from "./ReservaModal";
+import AdminReservaModal from "../reservas/AdminReservaModal";
 
 const emptyForm = { id: null, nombre: "", ubicacion: "", precio: 0, idTipo: null };
 
@@ -222,7 +222,7 @@ export default function CanchaManager({ onRedirectToTablero }) {
         </Paper>
       </Stack>
 
-      <ReservaModal 
+      <AdminReservaModal 
         opened={reservaModalOpened} 
         onClose={() => setReservaModalOpened(false)}
         onSuccess={() => {

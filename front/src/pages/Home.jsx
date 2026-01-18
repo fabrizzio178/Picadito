@@ -33,7 +33,7 @@ import {
 import { toast } from "react-toastify";
 import clubApi from "../services/clubApi";
 import { useSessionStore } from "../stores/useSessionStore";
-import ReservaModal from "../components/admin/ReservaModal"; 
+import ClientReservaModal from "../components/reservas/ClientReservaModal"; 
 
 export default function Home() {
   const [canchas, setCanchas] = useState([]);
@@ -270,7 +270,7 @@ export default function Home() {
       </Container>
 
       {/* MODAL DE RESERVA */}
-      <ReservaModal 
+      <ClientReservaModal 
         opened={modalOpened} 
         onClose={() => {
             close();

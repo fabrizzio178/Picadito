@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
 import Home from "./pages/Home.jsx";
 import PaymentStatus from "./pages/PaymentStatus.jsx";
+import Profile from "./pages/Profile.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/mis-reservas" element={<MisReservas />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/admin"
             element={

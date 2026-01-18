@@ -12,9 +12,10 @@ import {
   Text,
   Title,
   Box,
-  ActionIcon
+  ActionIcon,
+  Skeleton
 } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
+import ResponsiveDatePicker from "../components/ui/ResponsiveDatePicker"; // <-- NEW IMPORT
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals"; // <--- IMPORTAMOS MODALS
 import {
@@ -33,7 +34,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 
 import CanchaManager from "../components/admin/CanchaManager";
-import ReservaModal from "../components/admin/ReservaModal";
+import AdminReservaModal from "../components/reservas/AdminReservaModal";
 import clubApi from "../services/clubApi";
 
 dayjs.locale("es");
@@ -220,21 +221,14 @@ export default function AdminDashboard() {
                 </div>
               </Group>
               <Group align="center" gap="sm" style={{ flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'stretch' : 'flex-end' }}>
-                <DatePickerInput
-                  leftSection={<IconCalendar size={16} stroke={1.5} />}
-                  placeholder="Fecha"
-                  value={fechaFiltro}
-                  onChange={setFechaFiltro}
-                  minDate={new Date()}
-                  locale="es"
-                  valueFormat="DD [de] MMMM"
-                  size={isMobile ? "xs" : "sm"}
-                  type="default"
-                  radius="md"
-                  w={isMobile ? "100%" : 220}
-                  clearable={false}
-                  popoverProps={{ shadow: "xl", position: "bottom-start", withinPortal: true }}
-                />
+                <Box style={{ width: isMobile ? '100%' : 220 }}>
+                   <ResponsiveDatePicker
+                    placeholder="Fecha"
+                    value={fechaFiltro}
+                    onChange={setFechaFiltro}
+                    minDate={new Date()}
+                   />
+                </Box>
                 <Button variant="light" size="sm" leftSection={<IconRefresh size={16} />} loading={loading} onClick={loadReservas} style={{ height: isMobile ? 30 : 36 }} fullWidth={isMobile}>
                   Actualizar
                 </Button>
@@ -284,12 +278,22 @@ export default function AdminDashboard() {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {reservasDelDia.length === 0 && (
+                    {loading && Array.from({ length: 5 }).map((_, i) => (
+                      <Table.Tr key={`sk-${i}`}>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                        <Table.Td><Skeleton height={20} radius="md" /></Table.Td>
+                      </Table.Tr>
+                    ))}
+                    {!loading && reservasDelDia.length === 0 && (
                       <Table.Tr>
                         <Table.Td colSpan={6}><Text c="dimmed" ta="center" py="xl">Sin reservas hoy.</Text></Table.Td>
                       </Table.Tr>
                     )}
-                    {reservasDelDia.map((reserva) => (
+                    {!loading && reservasDelDia.map((reserva) => (
                       <Table.Tr key={reserva.id}>
                         <Table.Td><Text fz="sm" fw={500} truncate>{reserva.cliente?.nombre || "Sin nombre"}</Text></Table.Td>
                         
@@ -327,7 +331,7 @@ export default function AdminDashboard() {
         </Tabs.Panel>
       </Tabs>
 
-      <ReservaModal 
+      <AdminReservaModal 
         opened={reservaModalOpen}
         onClose={() => {
             setReservaModalOpen(false);

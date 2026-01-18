@@ -1,5 +1,6 @@
 import { AppShell, Container } from "@mantine/core";
 import Navbar from "../Navbar.jsx";
+import MobileNavbar from "./MobileNavbar.jsx";
 
 export default function AppShellLayout({ children }) {
   return (
@@ -17,7 +18,7 @@ export default function AppShellLayout({ children }) {
           },
           "@media (maxWidth: 48em)": {
             paddingTop: "calc(72px + var(--mantine-spacing-sm))",
-            paddingBottom: "2rem"
+            paddingBottom: "calc(80px + 1rem)" // Espacio para la MobileNavbar
           }
         }
       }}
@@ -30,6 +31,7 @@ export default function AppShellLayout({ children }) {
           {children}
         </Container>
       </AppShell.Main>
+      <MobileNavbar />
     </AppShell>
   );
 }

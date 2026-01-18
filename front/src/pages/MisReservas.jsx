@@ -57,7 +57,16 @@ export default function MisReservas() {
       setReservas(lista);
     } catch (error) {
       console.error("Error al cargar", error);
-      // Usamos toastify para el error de carga también
+      
+      // Si es 404 (No encontrado) o 400 (Bad Request - a veces pasa si no tiene reservas), 
+      // lo tomamos como que no hay datos.
+      const status = error?.response?.status;
+      if (status === 404 || status === 400) {
+          setReservas([]);
+          setLoading(false);
+          return;
+      }
+
       toast.error("No pudimos cargar tus partidos. Intentá recargar la página.");
     } finally {
       setLoading(false);
@@ -79,12 +88,12 @@ export default function MisReservas() {
       cancelProps: { variant: "subtle" },
       onConfirm: async () => {
         try {
-          await clubApi.reservas.cancel(id);
+          // Usamos REMOVE (Delete físico) para liberar el cupo, en lugar de setear estado "cancelado"
+          await clubApi.reservas.remove(id); 
           setReservas((prev) => prev.filter((r) => r.id !== id));
           
-          // --- AQUÍ ESTÁ LA MAGIA DE TOASTIFY ---
           toast.success("Reserva cancelada correctamente", {
-            position: "bottom-right", // O donde prefieras
+            position: "bottom-right", 
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
